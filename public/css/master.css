@@ -1,0 +1,8 @@
+div.plyr__menu__container {
+  overflow-y: hidden;
+}
+
+div.plyr__menu__container>div {
+  overflow-y: auto;
+  max-height: 300px;
+}
