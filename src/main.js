@@ -37,13 +37,13 @@ app.config.globalProperties.window = window;
 
 // Import and use social sharing (if available)
 try {
-  import("vue-social-sharing").then(({ default: SocialSharing }) => {
+  import("vue3-social-sharing").then(({ default: SocialSharing }) => {
     app.use(SocialSharing);
   }).catch(() => {
-    console.warn("vue-social-sharing not available");
+    console.warn("vue3-social-sharing not available");
   });
 } catch (err) {
-  console.warn("vue-social-sharing import failed:", err);
+  console.warn("vue3-social-sharing import failed:", err);
 }
 
 // Import share buttons component

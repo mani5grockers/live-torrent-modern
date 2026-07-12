@@ -22,7 +22,7 @@
     "express-rate-limit": "^7.1.5",
     "helmet": "^7.1.0",
     "iconv-lite": "^0.6.3",
-    "live-torrent-backend": "^1.3.0",
+    "live-torrent-backend": "github:Davenchy/live-torrent-backend",
     "morgan": "^1.10.0",
     "parse-torrent": "^11.0.2",
     "pinia": "^2.1.7",
@@ -31,7 +31,7 @@
     "uuid": "^9.0.1",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5",
-    "vue-social-sharing": "^4.0.0",
+    "vue3-social-sharing": "^1.0.0",
     "vuetify": "^3.5.0"
   },
   "devDependencies": {
