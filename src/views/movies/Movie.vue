@@ -307,7 +307,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { useMoviesStore } from "../../stores/movies";
 import MovieCard from "../../components/MovieCard";
 import { loadCaptions } from "../../utils/axios";
 import BookmarkButton from "../../components/BookmarkButton";
@@ -332,7 +332,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["loadMoviePage"]),
+    async loadMoviePage(id) {
+      const moviesStore = useMoviesStore();
+      return moviesStore.loadMoviePage(id);
+    },
     buildCaptionsQuery() {
       const { captions } = this;
       if (!captions.length) return "";

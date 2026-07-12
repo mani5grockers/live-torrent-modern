@@ -171,7 +171,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { useTorrentStore } from "../stores/torrent";
 import sizeFilter from "../mixins/sizeFilter";
 import Captions, { loadText, loadURL } from "../utils/captions";
 import BookmarkButton from "../components/BookmarkButton";
@@ -219,7 +219,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["loadTorrentInfo"]),
+    async loadTorrentInfo(torrentId) {
+      const torrentStore = useTorrentStore();
+      return torrentStore.loadTorrentInfo(torrentId);
+    },
     loadCaption() {
       loadURL({
         label: prompt("Caption Name:", "Unknown") || "Unknown",
@@ -364,7 +367,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(["torrentInfo"]),
+    torrentInfo() {
+      const torrentStore = useTorrentStore();
+      return torrentStore.torrentInfo;
+    },
     file() {
       const { torrentInfo } = this;
       return torrentInfo ? torrentInfo.files[this.fileIndex] : null;

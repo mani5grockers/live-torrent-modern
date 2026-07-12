@@ -191,7 +191,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from "vuex";
+import { useTorrentStore } from "../stores/torrent";
 import sizeFilter from "../mixins/sizeFilter";
 import BookmarkButton from "../components/BookmarkButton";
 
@@ -211,7 +211,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["loadTorrentInfo"]),
+    async loadTorrentInfo(torrentId) {
+      const torrentStore = useTorrentStore();
+      return torrentStore.loadTorrentInfo(torrentId);
+    },
     showImage(image) {
       this.Swal.fire({
         title: image.name,
@@ -271,8 +274,14 @@ export default {
     }
   },
   computed: {
-    ...mapState(["torrentInfo"]),
-    ...mapGetters(["filesTree"]),
+    torrentInfo() {
+      const torrentStore = useTorrentStore();
+      return torrentStore.torrentInfo;
+    },
+    filesTree() {
+      const torrentStore = useTorrentStore();
+      return torrentStore.filesTree;
+    },
     filter() {
       return (item, search, name) =>
         (item[name] || "").toLowerCase().indexOf(search.toLowerCase()) > -1;

@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { useTorrentStore } from "../stores/torrent";
 import uploadTorrentFile from "../utils/uploadTorrentFile";
 
 export default {
@@ -112,7 +112,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["loadTorrentInfo"]),
+    async loadTorrentInfo(torrentId) {
+      const torrentStore = useTorrentStore();
+      return torrentStore.loadTorrentInfo(torrentId);
+    },
     search() {
       this.loading = true;
       this.errors = "";

@@ -232,7 +232,7 @@
 
 <script>
 import MovieCard from "../../components/MovieCard";
-import { mapActions, mapGetters } from "vuex";
+import { useMoviesStore } from "../../stores/movies";
 import { getMoviesList } from "../../utils/axios";
 import BookmarkButton from "../../components/BookmarkButton";
 
@@ -256,7 +256,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["loadMoviesList"]),
+    async loadMoviesList(params) {
+      const moviesStore = useMoviesStore();
+      return moviesStore.loadMoviesList(params);
+    },
     readStorage(key) {
       const value = sessionStorage.getItem(key);
       return value !== null ? value : undefined;
@@ -377,7 +380,18 @@ export default {
     genre: n => sessionStorage.setItem("mse.genre", n || "all")
   },
   computed: {
-    ...mapGetters(["page", "pages", "movies"])
+    page() {
+      const moviesStore = useMoviesStore();
+      return moviesStore.page;
+    },
+    pages() {
+      const moviesStore = useMoviesStore();
+      return moviesStore.pages;
+    },
+    movies() {
+      const moviesStore = useMoviesStore();
+      return moviesStore.movies;
+    }
   },
   created() {
     const { readStorage } = this;
